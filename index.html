@@ -23,12 +23,13 @@
 
         .hero {
             position: relative;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
             background: linear-gradient(135deg, #0a3d2c 0%, #1a5c42 50%, #2d8659 100%);
             overflow: hidden;
+            padding: 80px 20px 20px;
         }
 
         .hero::before {
@@ -57,7 +58,7 @@
         }
 
         .hero h1 {
-            font-size: 5em;
+            font-size: clamp(2em, 8vw, 5em);
             font-weight: 800;
             margin-bottom: 20px;
             background: linear-gradient(135deg, #a5d6a7, #66bb6a, #4caf50);
@@ -69,8 +70,8 @@
         }
 
         .hero .subtitle {
-            font-size: 1.8em;
-            margin-bottom: 50px;
+            font-size: clamp(1.1em, 4vw, 1.8em);
+            margin-bottom: 40px;
             color: #c8e6c9;
             font-weight: 300;
             animation: fadeInUp 1s ease 0.2s both;
@@ -80,21 +81,22 @@
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 40px;
+            padding: 30px;
             border-radius: 24px;
             display: inline-block;
             animation: fadeInUp 1s ease 0.4s both;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 100%;
         }
 
         .team-card h3 {
-            font-size: 1.5em;
+            font-size: clamp(1.2em, 4vw, 1.5em);
             margin-bottom: 20px;
             color: #a5d6a7;
         }
 
         .team-card p {
-            font-size: 1.1em;
+            font-size: clamp(0.95em, 3vw, 1.1em);
             margin: 10px 0;
             color: #e8f5e9;
         }
@@ -110,14 +112,59 @@
             }
         }
 
+        /* Mobile Menu Hamburger */
+        .mobile-menu-toggle {
+            display: none;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(102, 187, 106, 0.9);
+            backdrop-filter: blur(10px);
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .mobile-menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -6px);
+        }
+
         nav {
             background: rgba(10, 15, 13, 0.95);
             backdrop-filter: blur(10px);
             padding: 0;
-            position: sticky;
+            position: fixed;
             top: 0;
-            z-index: 100;
+            left: 0;
+            right: 0;
+            z-index: 999;
             border-bottom: 1px solid rgba(165, 214, 167, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        nav.hidden {
+            transform: translateY(-100%);
         }
 
         nav ul {
@@ -127,19 +174,24 @@
             flex-wrap: wrap;
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0;
+        }
+
+        nav ul li {
+            margin: 0;
         }
 
         nav ul li a {
             display: block;
-            padding: 20px 30px;
+            padding: 18px 25px;
             color: #c8e6c9;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95em;
+            font-size: 0.9em;
             transition: all 0.3s ease;
             position: relative;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         nav ul li a::after {
@@ -169,14 +221,14 @@
         }
 
         section {
-            padding: 100px 20px;
+            padding: 80px 20px;
             position: relative;
         }
 
         section h2 {
-            font-size: 3.5em;
+            font-size: clamp(2em, 6vw, 3.5em);
             font-weight: 800;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
             text-align: center;
             background: linear-gradient(135deg, #a5d6a7, #66bb6a);
             -webkit-background-clip: text;
@@ -187,14 +239,14 @@
 
         .intro-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            grid-template-columns: 1fr;
+            gap: 40px;
             align-items: center;
-            margin-bottom: 60px;
+            margin-bottom: 50px;
         }
 
         .intro-text p {
-            font-size: 1.15em;
+            font-size: clamp(1em, 3vw, 1.15em);
             color: #c8e6c9;
             margin-bottom: 25px;
             line-height: 1.8;
@@ -204,7 +256,7 @@
             position: relative;
             border-radius: 24px;
             overflow: hidden;
-            aspect-ratio: 4/3;
+            aspect-ratio: 16/10;
             background: linear-gradient(135deg, #1a5c42, #2d8659);
             display: flex;
             align-items: center;
@@ -227,9 +279,9 @@
 
         .hormone-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 40px;
-            margin-top: 60px;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            margin-top: 50px;
         }
 
         .hormone-card {
@@ -237,7 +289,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(165, 214, 167, 0.2);
             border-radius: 24px;
-            padding: 40px;
+            padding: 30px;
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
@@ -260,27 +312,27 @@
         }
 
         .hormone-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 30px 80px rgba(102, 187, 106, 0.2);
+            transform: translateY(-5px);
+            box-shadow: 0 20px 50px rgba(102, 187, 106, 0.2);
             border-color: rgba(165, 214, 167, 0.4);
         }
 
         .hormone-icon {
-            font-size: 3em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 15px;
             display: block;
         }
 
         .hormone-card h3 {
             color: #a5d6a7;
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: clamp(1.5em, 5vw, 2em);
+            margin-bottom: 15px;
             font-weight: 700;
         }
 
         .hormone-card p {
             color: #c8e6c9;
-            font-size: 1.05em;
+            font-size: clamp(0.95em, 3vw, 1.05em);
             margin-bottom: 20px;
             line-height: 1.7;
         }
@@ -292,10 +344,10 @@
 
         .hormone-card ul li {
             color: #e8f5e9;
-            padding: 12px 0;
-            padding-left: 30px;
+            padding: 10px 0;
+            padding-left: 25px;
             position: relative;
-            font-size: 1.05em;
+            font-size: clamp(0.9em, 3vw, 1.05em);
         }
 
         .hormone-card ul li::before {
@@ -308,9 +360,9 @@
 
         .image-showcase {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin: 60px 0;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin: 50px 0;
         }
 
         .showcase-item {
@@ -327,7 +379,7 @@
         }
 
         .showcase-item:hover {
-            transform: scale(1.05);
+            transform: scale(1.02);
         }
 
         .showcase-item img {
@@ -343,15 +395,15 @@
             right: 0;
             background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
             color: white;
-            padding: 20px;
-            font-size: 0.9em;
+            padding: 15px;
+            font-size: clamp(0.85em, 3vw, 0.9em);
         }
 
         .curiosity-container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 60px;
+            grid-template-columns: 1fr;
+            gap: 25px;
+            margin-top: 50px;
         }
 
         .curiosity-box {
@@ -359,7 +411,7 @@
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 193, 7, 0.3);
             border-radius: 24px;
-            padding: 40px;
+            padding: 30px;
             position: relative;
             overflow: hidden;
             transition: all 0.4s ease;
@@ -368,28 +420,29 @@
         .curiosity-box::before {
             content: '💡';
             position: absolute;
-            top: 20px;
-            right: 20px;
-            font-size: 3em;
+            top: 15px;
+            right: 15px;
+            font-size: 2.5em;
             opacity: 0.3;
         }
 
         .curiosity-box:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.2);
+            box-shadow: 0 15px 40px rgba(255, 193, 7, 0.2);
             border-color: rgba(255, 193, 7, 0.5);
         }
 
         .curiosity-box h3 {
             color: #ffd54f;
-            font-size: 1.5em;
-            margin-bottom: 20px;
+            font-size: clamp(1.2em, 4vw, 1.5em);
+            margin-bottom: 15px;
             font-weight: 700;
+            padding-right: 50px;
         }
 
         .curiosity-box p {
             color: #e8f5e9;
-            font-size: 1.05em;
+            font-size: clamp(0.95em, 3vw, 1.05em);
             line-height: 1.8;
         }
 
@@ -400,7 +453,7 @@
         }
 
         .conclusion-content p {
-            font-size: 1.2em;
+            font-size: clamp(1em, 3vw, 1.2em);
             color: #c8e6c9;
             margin-bottom: 30px;
             line-height: 1.9;
@@ -408,7 +461,7 @@
 
         footer {
             background: linear-gradient(135deg, #0a3d2c, #1a5c42);
-            padding: 80px 20px 40px;
+            padding: 60px 20px 30px;
             border-top: 1px solid rgba(165, 214, 167, 0.2);
         }
 
@@ -419,44 +472,45 @@
 
         .references h2 {
             color: #a5d6a7;
-            margin-bottom: 40px;
-            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-size: clamp(1.8em, 5vw, 2.5em);
             text-align: center;
         }
 
         .references ul {
             list-style: none;
             display: grid;
-            gap: 20px;
+            gap: 15px;
         }
 
         .references li {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(10px);
-            padding: 20px 30px;
+            padding: 18px 20px;
             border-radius: 12px;
             border-left: 4px solid #66bb6a;
             color: #e8f5e9;
             transition: all 0.3s ease;
+            font-size: clamp(0.9em, 3vw, 1em);
         }
 
         .references li:hover {
             background: rgba(255, 255, 255, 0.08);
-            transform: translateX(10px);
+            transform: translateX(5px);
         }
 
         .footer-credit {
             text-align: center;
-            margin-top: 60px;
-            padding-top: 40px;
+            margin-top: 50px;
+            padding-top: 30px;
             border-top: 1px solid rgba(165, 214, 167, 0.2);
             color: #81c784;
-            font-size: 0.95em;
+            font-size: clamp(0.85em, 3vw, 0.95em);
         }
 
         .scroll-indicator {
             position: absolute;
-            bottom: 40px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
             width: 30px;
@@ -488,35 +542,125 @@
             100% { opacity: 0; transform: translateY(20px); }
         }
 
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5em;
-            }
-            
-            .hero .subtitle {
-                font-size: 1.2em;
-            }
-
+        /* Tablet breakpoint */
+        @media (min-width: 768px) {
             .intro-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-            
-            nav ul {
-                flex-direction: column;
-            }
-
-            section h2 {
-                font-size: 2.5em;
+                grid-template-columns: 1fr 1fr;
+                gap: 50px;
             }
 
             .hormone-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 35px;
             }
+
+            .image-showcase {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+            }
+
+            .curiosity-container {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 30px;
+            }
+        }
+
+        /* Mobile specific styles */
+        @media (max-width: 767px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            nav {
+                transform: translateX(-100%);
+                position: fixed;
+                width: 280px;
+                height: 100vh;
+                top: 0;
+                left: 0;
+                background: rgba(10, 15, 13, 0.98);
+                backdrop-filter: blur(20px);
+                border-right: 1px solid rgba(165, 214, 167, 0.2);
+                border-bottom: none;
+                overflow-y: auto;
+                padding-top: 80px;
+            }
+
+            nav.active {
+                transform: translateX(0);
+            }
+
+            nav ul {
+                flex-direction: column;
+                padding: 20px 0;
+            }
+
+            nav ul li {
+                width: 100%;
+            }
+
+            nav ul li a {
+                padding: 18px 30px;
+                border-bottom: 1px solid rgba(165, 214, 167, 0.1);
+                font-size: 1em;
+            }
+
+            nav ul li a::after {
+                display: none;
+            }
+
+            .hero {
+                padding-top: 100px;
+            }
+
+            section {
+                padding: 60px 20px;
+            }
+
+            .scroll-indicator {
+                display: none;
+            }
+        }
+
+        /* Overlay for mobile menu */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 998;
+            backdrop-filter: blur(5px);
+        }
+
+        .overlay.active {
+            display: block;
         }
     </style>
 </head>
 <body>
+    <!-- Mobile Menu Toggle -->
+    <button class="mobile-menu-toggle" id="menuToggle" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <nav id="mainNav">
+        <ul>
+            <li><a href="#introducao">Introdução</a></li>
+            <li><a href="#desenvolvimento">Desenvolvimento</a></li>
+            <li><a href="#curiosidades">Curiosidades</a></li>
+            <li><a href="#conclusao">Conclusão</a></li>
+            <li><a href="#fontes">Fontes</a></li>
+        </ul>
+    </nav>
+
     <div class="hero">
         <div class="hero-content">
             <h1>Hormônios Vegetais</h1>
@@ -531,16 +675,6 @@
         </div>
         <div class="scroll-indicator"></div>
     </div>
-
-    <nav>
-        <ul>
-            <li><a href="#introducao">Introdução</a></li>
-            <li><a href="#desenvolvimento">Desenvolvimento</a></li>
-            <li><a href="#curiosidades">Curiosidades</a></li>
-            <li><a href="#conclusao">Conclusão</a></li>
-            <li><a href="#fontes">Fontes</a></li>
-        </ul>
-    </nav>
 
     <section id="introducao">
         <div class="container">
@@ -561,7 +695,7 @@
                 </div>
             </div>
 
-            <div class="intro-grid" style="margin-top: 60px;">
+            <div class="intro-grid" style="margin-top: 50px;">
                 <div class="intro-image">
                     <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80" alt="Estrutura celular vegetal">
                     <div class="image-caption">Microestrutura vegetal</div>
@@ -742,14 +876,67 @@
         <div class="references">
             <h2>📚 Fontes e Referências</h2>
             <ul>
-                <li><strong>Livro Didático:</strong>AMABIS, José Mariano. Biologia Moderna. Editora Moderna, 2020</li>
-                <li><strong>Site Educativo:</strong> https://www.todamateria.com.br/hormonios-vegetais</li>
+                <li><strong>Livro Didático:</strong> [Inserir referência do livro de Biologia utilizado - ex: AMABIS, José Mariano. Biologia Moderna. Editora Moderna, 2020]</li>
+                <li><strong>Site Educativo:</strong> [Inserir URL completa - ex: https://www.todamateria.com.br/hormonios-vegetais]</li>
+                <li><strong>Artigo Científico:</strong> [Inserir referência de artigo científico consultado]</li>
+                <li><strong>Vídeo Educacional:</strong> [Inserir link do YouTube ou plataforma educativa utilizada]</li>
+                <li><strong>Imagens - Unsplash:</strong> Fotografias de plantas e natureza utilizadas sob licença Creative Commons</li>
+                <li><strong>Revista Científica:</strong> [Inserir referência de revista ou periódico científico]</li>
+                <li><strong>Portal de Biologia:</strong> [Inserir outros sites educativos consultados]</li>
             </ul>
             <div class="footer-credit">
                 <p>© 2025 - Projeto de Biologia sobre Hormônios Vegetais</p>
-                <p>Desenvolvido com dedicação pela turma 2° Branco</p>
+                <p>Desenvolvido com dedicação pela turma [Inserir Turma]</p>
             </div>
         </div>
     </footer>
+
+    <script>
+        // Mobile menu functionality
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        const overlay = document.getElementById('overlay');
+        const navLinks = document.querySelectorAll('nav ul li a');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+            overlay.classList.toggle('active');
+        });
+
+        overlay.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            mainNav.classList.remove('active');
+            overlay.classList.remove('active');
+        });
+
+        // Close menu when clicking on a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+                overlay.classList.remove('active');
+            });
+        });
+
+        // Smooth scroll for navigation links
+        navLinks.forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                if (targetSection) {
+                    const offset = 80; // Account for fixed nav height
+                    const targetPosition = targetSection.offsetTop - offset;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
