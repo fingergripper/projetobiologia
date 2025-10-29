@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hormônios Vegetais - Fitormônios</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0f0d;
+            color: #e8f5e9;
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #0a3d2c 0%, #1a5c42 50%, #2d8659 100%);
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=1920&q=80') center/cover;
+            opacity: 0.15;
+            animation: kenburns 30s infinite alternate;
+        }
+
+        @keyframes kenburns {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 0 20px;
+            max-width: 1200px;
+        }
+
+        .hero h1 {
+            font-size: 5em;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #a5d6a7, #66bb6a, #4caf50);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeInUp 1s ease;
+            letter-spacing: -2px;
+        }
+
+        .hero .subtitle {
+            font-size: 1.8em;
+            margin-bottom: 50px;
+            color: #c8e6c9;
+            font-weight: 300;
+            animation: fadeInUp 1s ease 0.2s both;
+        }
+
+        .team-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 24px;
+            display: inline-block;
+            animation: fadeInUp 1s ease 0.4s both;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .team-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: #a5d6a7;
+        }
+
+        .team-card p {
+            font-size: 1.1em;
+            margin: 10px 0;
+            color: #e8f5e9;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        nav {
+            background: rgba(10, 15, 13, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(165, 214, 167, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 20px 30px;
+            color: #c8e6c9;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: all 0.3s ease;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #66bb6a, #4caf50);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        nav ul li a:hover::after {
+            width: 80%;
+        }
+
+        nav ul li a:hover {
+            color: #a5d6a7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 3.5em;
+            font-weight: 800;
+            margin-bottom: 60px;
+            text-align: center;
+            background: linear-gradient(135deg, #a5d6a7, #66bb6a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -1px;
+        }
+
+        .intro-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+            margin-bottom: 60px;
+        }
+
+        .intro-text p {
+            font-size: 1.15em;
+            color: #c8e6c9;
+            margin-bottom: 25px;
+            line-height: 1.8;
+        }
+
+        .intro-image {
+            position: relative;
+            border-radius: 24px;
+            overflow: hidden;
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #1a5c42, #2d8659);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .intro-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .placeholder-text {
+            color: #4caf50;
+            font-size: 1.2em;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .hormone-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-top: 60px;
+        }
+
+        .hormone-card {
+            background: linear-gradient(135deg, rgba(26, 92, 66, 0.4), rgba(45, 134, 89, 0.2));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(165, 214, 167, 0.2);
+            border-radius: 24px;
+            padding: 40px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hormone-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #66bb6a, #4caf50);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .hormone-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .hormone-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 80px rgba(102, 187, 106, 0.2);
+            border-color: rgba(165, 214, 167, 0.4);
+        }
+
+        .hormone-icon {
+            font-size: 3em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .hormone-card h3 {
+            color: #a5d6a7;
+            font-size: 2em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hormone-card p {
+            color: #c8e6c9;
+            font-size: 1.05em;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .hormone-card ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .hormone-card ul li {
+            color: #e8f5e9;
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 1.05em;
+        }
+
+        .hormone-card ul li::before {
+            content: '→';
+            position: absolute;
+            left: 0;
+            color: #66bb6a;
+            font-weight: bold;
+        }
+
+        .image-showcase {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 60px 0;
+        }
+
+        .showcase-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            aspect-ratio: 16/10;
+            background: linear-gradient(135deg, #1a5c42, #2d8659);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .showcase-item:hover {
+            transform: scale(1.05);
+        }
+
+        .showcase-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            color: white;
+            padding: 20px;
+            font-size: 0.9em;
+        }
+
+        .curiosity-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .curiosity-box {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.05));
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 24px;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .curiosity-box::before {
+            content: '💡';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 3em;
+            opacity: 0.3;
+        }
+
+        .curiosity-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(255, 193, 7, 0.2);
+            border-color: rgba(255, 193, 7, 0.5);
+        }
+
+        .curiosity-box h3 {
+            color: #ffd54f;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .curiosity-box p {
+            color: #e8f5e9;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .conclusion-content {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .conclusion-content p {
+            font-size: 1.2em;
+            color: #c8e6c9;
+            margin-bottom: 30px;
+            line-height: 1.9;
+        }
+
+        footer {
+            background: linear-gradient(135deg, #0a3d2c, #1a5c42);
+            padding: 80px 20px 40px;
+            border-top: 1px solid rgba(165, 214, 167, 0.2);
+        }
+
+        .references {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .references h2 {
+            color: #a5d6a7;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .references ul {
+            list-style: none;
+            display: grid;
+            gap: 20px;
+        }
+
+        .references li {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            padding: 20px 30px;
+            border-radius: 12px;
+            border-left: 4px solid #66bb6a;
+            color: #e8f5e9;
+            transition: all 0.3s ease;
+        }
+
+        .references li:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(10px);
+        }
+
+        .footer-credit {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(165, 214, 167, 0.2);
+            color: #81c784;
+            font-size: 0.95em;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 50px;
+            border: 2px solid #66bb6a;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            padding-top: 8px;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-indicator::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            background: #66bb6a;
+            border-radius: 50%;
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(10px); }
+        }
+
+        @keyframes scroll {
+            0% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(20px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5em;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2em;
+            }
+
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            nav ul {
+                flex-direction: column;
+            }
+
+            section h2 {
+                font-size: 2.5em;
+            }
+
+            .hormone-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Hormônios Vegetais</h1>
+            <p class="subtitle">Desvendando os Segredos dos Fitormônios</p>
+            <div class="team-card">
+                <h3>Integrantes do Projeto</h3>
+                <p>Gabriel</p>
+                <p>Miguel</p>
+                <p>Pedro Villaverde</p>
+                <p><strong>Turma:</strong> 2° Branco</p>
+            </div>
+        </div>
+        <div class="scroll-indicator"></div>
+    </div>
+
+    <nav>
+        <ul>
+            <li><a href="#introducao">Introdução</a></li>
+            <li><a href="#desenvolvimento">Desenvolvimento</a></li>
+            <li><a href="#curiosidades">Curiosidades</a></li>
+            <li><a href="#conclusao">Conclusão</a></li>
+            <li><a href="#fontes">Fontes</a></li>
+        </ul>
+    </nav>
+
+    <section id="introducao">
+        <div class="container">
+            <h2>Introdução</h2>
+            
+            <div class="intro-grid">
+                <div class="intro-text">
+                    <p>
+                        Os hormônios vegetais, também conhecidos como fitormônios, são substâncias químicas produzidas pelas plantas que regulam diversos processos fisiológicos essenciais para seu crescimento, desenvolvimento e adaptação ao ambiente.
+                    </p>
+                    <p>
+                        Assim como os animais possuem hormônios que controlam funções corporais, as plantas também utilizam esses mensageiros químicos para coordenar suas atividades vitais, desde a germinação até a floração e amadurecimento dos frutos.
+                    </p>
+                </div>
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&q=80" alt="Planta em crescimento">
+                    <div class="image-caption">Crescimento vegetal em ação</div>
+                </div>
+            </div>
+
+            <div class="intro-grid" style="margin-top: 60px;">
+                <div class="intro-image">
+                    <img src="https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&q=80" alt="Estrutura celular vegetal">
+                    <div class="image-caption">Microestrutura vegetal</div>
+                </div>
+                <div class="intro-text">
+                    <p>
+                        Neste trabalho, exploraremos os principais tipos de fitormônios - auxina, citocinina, giberelina, ácido abscísico e etileno - compreendendo suas funções específicas e sua importância para a vida das plantas.
+                    </p>
+                    <p>
+                        Através deste estudo, será possível entender como as plantas respondem aos estímulos ambientais e regulam processos complexos que garantem sua sobrevivência e reprodução.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="desenvolvimento">
+        <div class="container">
+            <h2>Desenvolvimento</h2>
+            
+            <div class="hormone-grid">
+                <div class="hormone-card">
+                    <span class="hormone-icon">🌾</span>
+                    <h3>Auxina</h3>
+                    <p>
+                        A auxina é um dos hormônios vegetais mais importantes e estudados. Produzida principalmente nos meristemas apicais, ela promove o alongamento celular e é responsável por fenômenos como fototropismo e gravitropismo.
+                    </p>
+                    <ul>
+                        <li>Promove crescimento de raízes e caules</li>
+                        <li>Controla dominância apical</li>
+                        <li>Estimula formação de raízes adventícias</li>
+                        <li>Participa do desenvolvimento de frutos</li>
+                    </ul>
+                </div>
+
+                <div class="hormone-card">
+                    <span class="hormone-icon">🌿</span>
+                    <h3>Citocinina</h3>
+                    <p>
+                        As citocininas promovem a divisão celular e atuam em conjunto com as auxinas. São produzidas principalmente nas raízes e transportadas através do xilema para outras partes da planta.
+                    </p>
+                    <ul>
+                        <li>Estimula divisão celular</li>
+                        <li>Retarda envelhecimento das folhas</li>
+                        <li>Promove desenvolvimento de gemas laterais</li>
+                        <li>Auxilia mobilização de nutrientes</li>
+                    </ul>
+                </div>
+
+                <div class="hormone-card">
+                    <span class="hormone-icon">🌱</span>
+                    <h3>Giberelina</h3>
+                    <p>
+                        As giberelinas promovem o crescimento do caule e a germinação de sementes. Existem mais de 100 tipos diferentes, sendo especialmente importantes para quebrar a dormência.
+                    </p>
+                    <ul>
+                        <li>Promove alongamento do caule</li>
+                        <li>Estimula germinação de sementes</li>
+                        <li>Quebra dormência de gemas</li>
+                        <li>Induz floração em algumas espécies</li>
+                    </ul>
+                </div>
+
+                <div class="hormone-card">
+                    <span class="hormone-icon">🍂</span>
+                    <h3>Ácido Abscísico</h3>
+                    <p>
+                        Conhecido como o "hormônio do estresse", o ABA é produzido quando a planta enfrenta condições adversas. Ao contrário dos hormônios de crescimento, geralmente inibe processos metabólicos.
+                    </p>
+                    <ul>
+                        <li>Induz fechamento de estômatos na seca</li>
+                        <li>Mantém sementes em dormência</li>
+                        <li>Inibe crescimento sob condições desfavoráveis</li>
+                        <li>Promove resistência ao estresse hídrico</li>
+                    </ul>
+                </div>
+
+                <div class="hormone-card">
+                    <span class="hormone-icon">🍌</span>
+                    <h3>Etileno</h3>
+                    <p>
+                        O etileno é único por ser gasoso em condições normais. É amplamente conhecido por seu papel no amadurecimento de frutos, mas também participa de outros processos importantes.
+                    </p>
+                    <ul>
+                        <li>Promove amadurecimento de frutos</li>
+                        <li>Induz abscisão de folhas e frutos</li>
+                        <li>Estimula floração em algumas espécies</li>
+                        <li>Participa de respostas ao estresse mecânico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="image-showcase">
+                <div class="showcase-item">
+                    <img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=800&q=80" alt="Fototropismo">
+                    <div class="image-caption">Fototropismo - resposta à luz mediada por auxina</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://images.unsplash.com/photo-1530836369250-ef72a3f5cda8?w=800&q=80" alt="Germinação">
+                    <div class="image-caption">Germinação estimulada por giberelina</div>
+                </div>
+                <div class="showcase-item">
+                    <img src="https://images.unsplash.com/photo-1528825871115-3581a5387919?w=800&q=80" alt="Amadurecimento">
+                    <div class="image-caption">Amadurecimento de frutos pelo etileno</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="curiosidades">
+        <div class="container">
+            <h2>Curiosidades</h2>
+            
+            <div class="curiosity-container">
+                <div class="curiosity-box">
+                    <h3>Bananas e o Efeito Dominó</h3>
+                    <p>
+                        As bananas produzem grandes quantidades de etileno durante o amadurecimento. Como o etileno é gasoso, ele se espalha facilmente e acelera o amadurecimento de outras frutas próximas. Por isso, é recomendado guardar frutas que queremos preservar longe das bananas!
+                    </p>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Plantas "Inteligentes"</h3>
+                    <p>
+                        A auxina migra para o lado sombreado da planta quando há luz unilateral. Com maior concentração de auxina, o lado sombreado cresce mais rápido, fazendo a planta se curvar em direção à luz. Este fenômeno é chamado de fototropismo positivo.
+                    </p>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Revolução na Agricultura</h3>
+                    <p>
+                        Os agricultores utilizam hormônios vegetais artificiais para controlar crescimento, induzir formação de raízes em estacas, sincronizar floração, retardar amadurecimento durante transporte e até como herbicidas seletivos.
+                    </p>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Darwin e os Hormônios</h3>
+                    <p>
+                        Charles Darwin foi um dos primeiros cientistas a estudar o fototropismo em plantas. Seus experimentos com coleóptilos de gramíneas pavimentaram o caminho para a descoberta da auxina décadas depois.
+                    </p>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Defesa Química</h3>
+                    <p>
+                        Quando uma planta é atacada por herbívoros, ela pode liberar etileno que funciona como um sinal de alerta para plantas vizinhas, que então ativam suas próprias defesas químicas preventivamente.
+                    </p>
+                </div>
+
+                <div class="curiosity-box">
+                    <h3>Gravidade Zero</h3>
+                    <p>
+                        Em experimentos no espaço, plantas conseguem crescer normalmente graças à auxina, que compensa a ausência de gravidade. Isso é crucial para futuras missões espaciais de longa duração.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="conclusao">
+        <div class="container">
+            <h2>Conclusão</h2>
+            <div class="conclusion-content">
+                <p>
+                    Os hormônios vegetais são essenciais para a sobrevivência e o desenvolvimento das plantas, atuando como mensageiros químicos que coordenam processos complexos desde a germinação até a senescência. Cada fitormônio possui funções específicas, mas todos trabalham de forma integrada para garantir o crescimento adequado e a adaptação das plantas ao ambiente.
+                </p>
+                <p>
+                    Compreender os mecanismos de ação dos hormônios vegetais não é apenas importante do ponto de vista científico, mas também tem aplicações práticas significativas na agricultura, na horticultura e na biotecnologia. O conhecimento sobre auxinas, citocininas, giberelinas, ácido abscísico e etileno permite o desenvolvimento de técnicas que aumentam a produtividade agrícola e melhoram a qualidade dos produtos vegetais.
+                </p>
+                <p>
+                    Este estudo nos permitiu compreender que as plantas, apesar de não possuírem sistema nervoso, têm sofisticados sistemas de comunicação química que as tornam capazes de responder e se adaptar às mais diversas condições ambientais. Os fitormônios são verdadeiros maestros que regem a sinfonia da vida vegetal.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer id="fontes">
+        <div class="references">
+            <h2>📚 Fontes e Referências</h2>
+            <ul>
+                <li><strong>Livro Didático:</strong>AMABIS, José Mariano. Biologia Moderna. Editora Moderna, 2020</li>
+                <li><strong>Site Educativo:</strong> https://www.todamateria.com.br/hormonios-vegetais</li>
+            </ul>
+            <div class="footer-credit">
+                <p>© 2025 - Projeto de Biologia sobre Hormônios Vegetais</p>
+                <p>Desenvolvido com dedicação pela turma 2° Branco</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
